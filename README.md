@@ -1,8 +1,8 @@
 ## COVID-19-CXR-Analyzer - Under Construction
 This flask web app uses a fine tuned Yolov5 model to detect and localize COVID-19 on chest x-rays.
 
-This demo will be live until 31 August 2021.<br>
-Demo App: 
+This demo will be live until 31 August 2021. [ Still under construction ]<br>
+Demo App: https://covid19.test.woza.work/
 
 <br>
 
