@@ -21,9 +21,6 @@ https://www.kaggle.com/c/siim-covid19-detection/data
 
 The frontend and backend code is available in this repo. The model was too large to be uploaded. The model should be placed inside the folder called "yolov5".
 
-If you specifically want to see how the yolov5 model was deployed then please review the code in the views.py file.
-
-
 The code is set up to be run as a Docker container. It's based on this video tutorial:
 
 Julian Nash docker and flask video tutorial<br>
@@ -31,3 +28,8 @@ https://www.youtube.com/watch?v=dVEjSmKFUVI
 
 
 The .dockerignore file may not be visible. Please create this file if you don't see it. In this repo I've included a txt file that explains the steps for installing Docker and Docker Compose on a Linux server. There is folder called 'static' containing a predict.html file. This folder is not essential and can be deleted. 
+
+If you specifically want to see how the yolov5 model was deployed then please review the code in the views.py file.
+
+I've created a Kaggle notebook that explains how to use Yolov5. If you are a beginner I suggest reviewing that notebook before reviewing the views.py file.<br>
+https://www.kaggle.com/vbookshelf/basics-of-yolo-v5-balloon-detection
