@@ -21,6 +21,8 @@ https://www.kaggle.com/c/siim-covid19-detection/data
 
 The frontend and backend code is available in this repo. The model was too large to be uploaded. The model should be placed inside the folder called "yolov5".
 
+If you specifically want to see how the yolov5 model was deployed then please review the code in the views.py file.
+
 
 The code is set up to be run as a Docker container. It's based on this video tutorial:
 
