@@ -1,0 +1,16 @@
+Click==7.0
+Flask==1.1.1
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+uWSGI==2.0.18
+Werkzeug==0.16.0
+numpy==1.19.5
+Pillow==8.2.0
+matplotlib==3.4.1
+matplotlib-venn==0.11.6
+pandas==1.2.3
+requests==2.26.0
+PyYAML==5.3.1
+tqdm==4.61.2
+seaborn==0.11.1
