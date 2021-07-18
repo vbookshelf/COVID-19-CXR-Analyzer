@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>COVID-19 CXR Analyzer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Use computer vision to detect and localize COVID-19 on chest x-rays.">
+
+
+
+<!--CSS Stylesheets-->
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/covid.css">
+
+<!--Link to Font Awesome icons-->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.2/css/all.css' integrity='sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns' crossorigin='anonymous'>
+
+
+
+<!--Link to fonts from google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+<link rel="shortcut icon" type="image/png" href="robotfavicon.png">
+
+
+<style>
+html,body,h2,h3,h4,p,h5,li {font-family: Roboto, sans-serif}
+</style>
+
+
+</head>
+
+
+
+
+<body class="bground-color">
+
+
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content. -->
+<div class="w3-content" style="max-width:1500px">
+	
+	
+<!-- 1. HOME PAGE -->
+<div class="w3-animate-opacity">
+	
+	
+	
+<!-- Normal Header -->
+<div class='normal-header w3-margin-bottom'>
+	
+	<p class="w3-padding-left no-margin space-letters w3-left-align unblock title-text">
+		<a class="w3-text-purple" href="index.html"><i class='fas fa-barcode w3-padding-right' style='font-size:18px;color:red'></i><b>COVID-19 CXR Analyzer</b></a></p>
+		
+	<p class="no-margin unblock space-letters w3-padding w3-text-purple w3-right info-text">
+		<a href="more-info.html"><b>More Info</b></a>
+	</p>
+	
+</div>
+
+
+
+
+
+
+<!-- Mobile Header -->
+<div class='mobile-header w3-margin-bottom w3-center'>
+	
+	<p class="w3-padding-left no-margin space-letters w3-text-purple title-text">
+		<i class='fas fa-barcode w3-padding-right' style='font-size:18px;color:red'></i><b>COVID-19 CXR Analyzer - Under Construction</b></p>
+		
+	<p class="no-margin pace-letters w3-text-blue info-text">
+		<a href="more-info.html"><b>More Info</b></a>
+	</p>
+	
+</div>
+
+
+
+<!-- 960 width region -->
+<div class='w3-content w3-round w3-center' style="max-width:960px">
+	
+
+
+<!-- Front page image -->
+<!-- This image will be replaced once the js code runs. -->
+<div class="w3-padding-bottom w3-center unblock">
+	
+	<div class="w3-margin-right w3-margin-left">
+
+		<img id="selected-image" class="w3-round adjust-image unblock" src="assets/bbox-cxr.jpg"  height="450" alt="Image for analysis"> 
+	
+	</div>
+	
+	
+	
+	<!-- Button -->
+	<div id="btnn" class="w3-center w3-margin-top">
+		
+		
+		<button class="w3-btn w3-purple w3-hover-blue w3-round w3-margin-bottom adjust-spacing btn-font w3-padding w3-space-letters w3-text-white" onclick="setTimeout(simulateClick.bind(null, 'image-selector'), 200)"><i class='fas fa-camera w3-padding-right' style='font-size:15px'></i>
+			<b>Submit Image</b></button>
+			
+		<button class="passive-button w3-btn w3-purple w3-round w3-margin-bottom adjust-spacing btn-font w3-padding w3-space-letters w3-text-white">
+			<b>ANALYZE >></b></button>
+			
+		<button class="active-button w3-btn w3-purple w3-hover-blue w3-round w3-margin-bottom adjust-spacing btn-font w3-padding w3-space-letters w3-text-white" onclick="setTimeout(simulateClick.bind(null, 'predict-button'), 200)">
+			<b>ANALYZE >></b></button>
+			
+	</div>
+
+	
+</div>
+
+
+
+<!-- Results Box -->
+
+<div class="w3-center w3-round
+text-color space-letters dont-break-out unblock set-alignment results-box dark-color bottom-margin">
+
+	<!-- Bar-->
+	<div class="">
+		<div class="w3-container w3-purple" style="height:5px;width:100%"></div>
+	</div>
+
+	<p class="w3-text-teal results-text">Results</p>
+	
+	<p class="w3-text-black spin-text"><span class="progress-spinner w3-text-teal"><i class='far fa-life-ring fa-spin' style='font-size:24px'></i></span></p>
+	
+	<p class="static-spinner spin-text w3-text-teal"><i class='far fa-life-ring' style='font-size:24px'></i></p>
+	
+	<p class='w3-text-sand space-letters w3-padding-top preds-text' id="count-prediction">---</p>
+	
+	
+	
+	<p class="w3-text-teal space-letters message-text" id="file-name">Please submit a jpg or png image,<br> then click Analyze.</p>
+	
+</div>
+
+
+
+</div><!-- End of 960 width region -->
+
+
+</div><!--END OF HOME PAGE-->
+
+
+
+
+
+<!-- We simulate clicks on these two. -->
+<div class="hide">
+	<button id='predict-button'>Predict</button>
+</div>
+
+  
+
+<div class="hide">
+	<input id="image-selector" type="file">
+</div>
+<!--===================================-->
+
+
+<!-- Load jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+</script>
+
+<script>
+
+// When the page loads fo the first time:
+$('.progress-spinner').hide();
+$('.active-button').hide();
+
+function simulateClick(tabID) {
+	
+	document.getElementById(tabID).click();
+}
+
+
+    let base64Image;
+	
+    $("#image-selector").change(function() {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let dataURL = reader.result;
+			
+			// When the user submits an image:
+			// Hide the passive 'Analze' button
+			// Show the active 'Analyze' button
+			$('.active-button').show();
+			$('.passive-button').hide();
+			
+			
+			
+			//console.log(dataURL);
+			
+			// Display the image the user has submitted on the web page.
+			// Do this by changing the src attribute of the elemnt with
+			// the following id: #selected-image
+            $('#selected-image').attr("src", dataURL);
+			
+			
+			
+			// The dataURL is the image in the form of a string.
+			// If you print(dataURL) you will see the string and it's prefix.
+			// We need to remove the prefix before we can convert the string
+			// into an image. This conversion is done on the server side.
+			// Here we are removing the prefix from the dataURL.
+            dataURL = dataURL.replace("data:image/jpg;base64,","");
+            dataURL = dataURL.replace("data:image/jpeg;base64,","");
+            dataURL = dataURL.replace("data:image/png;base64,","");
+			
+			base64Image = dataURL;
+			
+			
+            //console.log(base64Image);
+        }
+		
+		console.log('hello');
+		
+		// Read the image
+        reader.readAsDataURL($("#image-selector")[0].files[0]);
+		
+		// Get the image file name
+		fname = $("#image-selector")[0].files[0].name;
+		
+		console.log(fname);
+		
+		// Clear the previous prediction.
+        $("#count-prediction").text("");
+
+		$("#file-name").text(fname);
+        
+    });
+	
+	
+    // This executes when the user clicks the predict button.
+    $("#predict-button").click(function(){
+		
+
+		$('.progress-spinner').show();
+		$('.explain-text').hide();
+		$('.static-spinner').hide();
+		
+		// Display the image file name of the image that the user submitted.
+		$("#file-name").text(fname);
+		
+        let message = {
+            image: base64Image,
+			image_fname: fname
+        }
+		
+        //console.log(message);
+		
+		
+		// Send the image to the server and receive the response.
+		//........................................................
+		// Here set the endpoint URL to where you want to send the image.
+		// hamba.work/predict is the address to the load balancer.
+		// The load balancer has HTTPS set up.
+        $.post("https://hamba.work/predict", JSON.stringify(message), function(response){
+			
+			// Receive the response (prediction) from the server. 
+			// Put the response in the html element that has 
+			// the following id: #count-prediction
+			// Look in the backend 'views' file to see
+			// the format of the response.
+			// 'prediction' and 'wheat_count' are dictionary keys.
+            $("#count-prediction").text(response.prediction.pred_class);
+			
+			// This part of the image string was removed
+			// before the image was sent to the app server.
+			// It doesn't matter whether the original image the 
+			// user submitted was in jpg or png format. We simply
+			// need this string in the image so it can be displayed
+			// on the web page.
+			let str1 = "data:image/jpeg;base64,";
+			
+			// Get the model output image as a string.
+			// Look in the backend 'views' file to see
+			// the format of the response. 
+			// 'prediction' and 'image' are dictionary keys.
+			let str2 = response.prediction.image;
+			let fname1 = response.prediction.image_fname;
+			
+			// Concat both strings
+			let returned_image = str1.concat(str2);
+			
+			// Display the model output image on the web page.
+			// Do this by changing the src attribute of the element with
+			// the following id: #returned-image
+            $('#selected-image').attr("src", returned_image);
+			
+			// Display the image file name that
+			// that came with the image from the server.
+			// Display the image file name of the image that the user submitted.
+			$("#file-name").text(fname1);
+			
+			// Hide the spinner.
+			$('.progress-spinner').hide();
+			$('.static-spinner').show();
+			
+			// After the response from the server has been received:
+			// Hide the active 'Analze' button
+			// Show the passive 'Analyze' button
+			$('.active-button').hide();
+			$('.passive-button').show();
+			
+			
+			console.log('Click on the response object');
+            console.log(response);
+        });
+    });
+	
+</script>
+	
+	
+	
+</div> <!-- w3-content -->
+
+
+</body>
+</html>
+

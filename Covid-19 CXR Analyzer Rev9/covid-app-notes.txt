@@ -1,0 +1,9 @@
+Notes
+
+
+1- The model (exp145-best.pt) is inside the "yolov5" folder.
+2- The "yolov5" folder is placed inside the "flask" folder.
+3- A server with 4GB RAM and 2 CPUs works best. (Ubuntu 18.04)
+4- This app is using the offline version of yolov5.
+5- The requirements that are specifically needed by yolov5 are at the bottom of the requirements.txt file.
+5- This code includes a fix for the cv2 module download errors that happen when using a server.
