@@ -35,7 +35,8 @@ https://www.kaggle.com/vbookshelf/basics-of-yolo-v5-balloon-detection
   c) Place the yolov5 folder inside the 'flask' folder. [Covid-Backend/flask]<br>
 4- The .dockerignore file may not be visible. Please create this file if you don't see it.<br>
 5- There is folder called 'static' containing a predict.html file. This folder is not essential and can be deleted.<br>
-6- In this repo I've included a file that explains the steps for installing Docker and Docker Compose on a Linux server.
+6- In this repo I've included a file that explains the steps for installing Docker and Docker Compose on a Linux server.<br>
+7- My code is available under an MIT License. But please note that the model can't be used commercially because I trained it using competition data that is licensed for research use only.
 
 ## References
 
@@ -45,3 +46,4 @@ https://github.com/ultralytics/yolov5
 2- The code is set up to be run as a Docker container. It's based on this video tutorial:<br>
 Julian Nash docker and flask video tutorial<br>
 https://www.youtube.com/watch?v=dVEjSmKFUVI
+
