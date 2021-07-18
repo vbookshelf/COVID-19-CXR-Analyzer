@@ -20,7 +20,7 @@ https://www.kaggle.com/c/siim-covid19-detection/data
 If you specifically want to see how the yolov5 model was deployed then please review the code in the views.py file.<br>
 [Covid-Backend/flask/app/views.py]
 
-I've created a Kaggle notebook that explains how to use Yolov5. If you are a beginner I suggest reviewing that notebook before reviewing the views.py file.<br>
+I created a Kaggle notebook that explains how to use Yolov5. If you are a beginner I suggest reviewing that notebook before reviewing the views.py file.<br>
 https://www.kaggle.com/vbookshelf/basics-of-yolo-v5-balloon-detection
 
 
