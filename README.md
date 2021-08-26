@@ -29,12 +29,9 @@ https://www.kaggle.com/vbookshelf/basics-of-yolo-v5-balloon-detection
 
 1- The frontend and backend code is available in this repo.<br>
 2- The model was too large to be uploaded.<br>
-3- Before uploading to ypur server:<br>
-  a) Download the Ultralytics yolov5 repo. After unzipping you will find a folder called 'yolov5'.<br>
-  b) Place the trained model inside the 'yolov5' folder.<br>
-  c) Place the yolov5 folder inside the 'flask' folder. [Covid-Backend/flask]<br>
-  d) The .dockerignore file may not be visible. Please create this file if you don't see it.<br>
-4- There is folder called 'static' containing a predict.html file. This folder is not essential and can be deleted.<br>
+3- Setup notes are included in a file called covid-app-notes.txt. This file is located inside the main folder.<br>
+4- The .dockerignore file may not be visible. Please create this file if you don't see it.<br>
+5- There is folder called 'static' containing a predict.html file. This folder is not essential and can be deleted.<br>
 
 ## References
 
