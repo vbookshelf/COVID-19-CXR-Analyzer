@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+<meta charset="utf-8">
+<title>More Info</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--CSS Stylesheets-->
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/woza.css">
+
+<!--Link to Font Awesome icons-->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.2/css/all.css' integrity='sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns' crossorigin='anonymous'>
+
+
+<!--Link to fonts from google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="shortcut icon" type="image/png" href="robotfavicon.png">
+
+</head>
+
+
+
+
+
+
+<body class="w3-pale-blue">
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content. -->
+
+<div style="max-width:1500px">
+<!-- 1. HOME PAGE TAB -->
+<div class="w3-animate-opacity w3-padding w3-margin-bottom">
+	
+
+	
+
+
+<!-- 960 width region -->
+<div class='w3-content w3-padding w3-white' style="max-width:960px">
+	
+	
+	
+<!-- Top Bar -->
+<div class='normal-bar w3-padding w3-round w3-text-black w3-opacity w3-small'>
+	
+
+	<p class="w3-padding-left no-margin space-letters w3-left-align unblock">
+	<a class="change-size" href="https://woza.work/"><b>Woza.Work</b></a></p>
+	
+	<p class="no-margin unblock space-letters w3-right">
+		
+		<a class="change-size" href="index.html"><b>Home</b></a> -
+		<a class="change-size" href="#contact"><b>Contact</b></a>
+		
+	</p>
+</div>
+	
+
+
+
+<div class="w3-text-purple w3-center w3-margin space-letters">
+	
+	<h4>COVID-19 CXR Analyzer</h4>
+	
+</div>
+
+
+
+<div class='bottom-margin'>
+	
+	
+	<!-- Start of block -->
+	<div class='side-margin1 w3-round text-color space-letters 
+	w3-margin-bottom'>
+	
+			<p class='w3-text-purple topp-margin'><b>Model Revision Record</b></p>
+			
+			<div class='w3-small'>
+				
+				<p>Model Name: exp145-best.pt<br>
+				Deployment Status: Prototype</p>
+				
+				<p>Revision: Rev-P0<br>
+				Date: 18-July-2021<br>
+				Revised by: vbookshelf<br>
+				Details: Released for demonstration.</p>
+				
+			</div>
+			
+			<div class='w3-small'>
+				
+				<p><b>Known Issues:</b></p>
+				
+				<p>1- The latency (prediction time) can sometimes be more than 5 seconds. This needs to be reduced to less than 3 seconds.</p>
+				
+			</div>
+			
+			<hr>
+			
+			
+			<p class='w3-text-purple topp-margin'><b>Purpose</b></p>
+			
+			<p>This web app uses computer vision to detect and localize COVID-19 on chest x-rays. It classifies each image into one of two classes:<br>
+				- Negative for pneumonia<br>
+				- Typical for COVID-19</p>
+		
+			
+			
+			<p class='w3-text-purple topp-margin'><b>Input</b></p>
+			
+			<p>1- Submitted images should be in jpg or png format.</p>
+				
+			<p>2- The dicom and tiff formats are not supported.</p>
+			
+			
+			<p class='w3-text-purple topp-margin'><b>Output</b></p>
+			
+			<p> The app outputs one of two predicted classes - Negative for pneumonia or Typical for COVID-19. When the app predicts 'Typical for COVID-19', it also draws bounding boxes around areas where it detected opacity.</p>
+				
+		
+			
+			
+			<p class='w3-text-purple topp-margin'><b>Dataset Summary</b></p>
+			
+			<p>I fine tuned a <a href="https://github.com/ultralytics/yolov5" target='_blank' class="w3-text-blue">Yolov5</a> model using data from the Kaggle
+				<a href="https://www.kaggle.com/c/siim-covid19-detection/data" target='_blank' class="w3-text-blue">SIIM-FISABIO-RSNA COVID-19 Detection</a> competition. </p>
+				
+			<p>The original dataset has four classes:<br>
+				- negative for pneumonia<br>
+				- typical, atypical and indeterminate for COVID-19</p>
+			
+			<div class='w3-small'>
+				<p>Source image format: Dicom<br>
+					Training image format: jpeg<br>
+					Total images: 6334</p>
+					
+					<p>Num patients: 3261<br>
+					Num female patients: 1624<br>
+					Num male patients: 1637<br>
+					Num female images: 2770<br>
+					Num male images: 3564</p>
+					
+					<p>Min patient age: No info<br>
+					Max patient age: No info<br>
+					Patient ethnicity: No info</p>
+			</div>
+			
+			<p>You can find the dataset license info<a href="https://www.kaggle.com/c/siim-covid19-detection/data" target='_blank' class="w3-text-blue"> here</a>.</p>
+			
+			
+			
+			
+			<p class='w3-text-purple topp-margin'><b>Validation Performance</b></p>
+			
+			
+			
+			<p class="w3-small">Confusion Matrix</p>
+			
+			<div>
+
+				<img class="w3-round" src="assets/exp145-conf-matrix.png"  width="63%" alt="Confusion matrix"> 
+			
+			</div>
+			
+			
+			<p class="w3-small">Classification Report</p>
+			
+			<div>
+
+				<img class="w3-round" src="assets/exp145-classif-report.png"  width="100%" alt="Classification report"> 
+			
+			</div>
+			
+			<hr>
+			
+			<p>I used image augmentation during training. This helps the model to generalize. Also, if images of the same patient did appear in both the train and validation sets, augmentation reduces the similarity between those images.</p>
+				
+			
+			
+			
+			
+			<p class='w3-text-purple topp-margin'><b>Misc Info</b></p>
+			
+			<p> 1- The dataset did not include patient ages but
+				it appears that there are no chest x-rays of children. 
+				Therefore, this model should not be trusted to provide reliable results on child
+				x-ray images.</p>
+				
+			
+				<p>2- In practice users could submit images of varying quality. These images could have been taken using different types of x-ray machines or even be photos of x-ray films taken with cellphone cameras. These and other real-world factors could reduce the accuracy of the model.</p>
+				
+			<p>3- The app has been optimized for use on mobile devices.</p>
+			
+			
+			<p>4- This demo will be live until 31 August 2021. 
+				The code is open source. You are welcome to use it to host this app on your own server.</p>
+				
+			
+			
+			
+			
+
+			<p class='w3-text-purple topp-margin'><b>Documentation</b></p>
+			
+			<p>1- The frontend and backend code is available on <a href="https://github.com/vbookshelf/COVID-19-CXR-Analyzer" target='_blank' class="w3-text-blue">GitHub.</a></p>
+			
+			<p>2- My code is available under an MIT License. But please note that the model can't be used commercially because I trained it using competition data that is licensed for research use only.</p>
+			
+			
+			
+			
+			<p id='contact' class='w3-text-purple topp-margin'><b>Contact</b></p>
+			
+			<p>Email: contact -at- woza -dot- work<br>
+			Ref: COVID-19 CXR Analyzer</p>
+			
+			
+			
+			
+		
+	</div>
+	<!-- End of block -->
+	
+</div>
+
+
+
+
+
+</div><!-- End of 960 width region -->
+
+
+
+
+</div><!--END OF HOME PAGE TAB-->
+</div> <!-- w3-content -->
+</body>
+</html>
+
